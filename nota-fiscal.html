@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emissão de Nota Fiscal</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    form{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+    td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+        background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Emissão de Nota Fiscal</h1>
+
+  <form id="notaFiscalForm">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" required>
+
+    <label for="cnpj">CNPJ:</label>
+    <input type="number" id="cnpj" name="cnpj" required>
+
+    <label for="servico">Tipo de Serviço:</label>
+    <input type="text" id="servico" name="servico" required>
+
+    <label for="valor">Valor do Serviço:</label>
+    <input type="number" id="valor" name="valor" required>
+
+    <label for="imposto">Taxa de Imposto (%):</label>
+    <input type="number" id="imposto" name="imposto" required>
+
+    <button type="button" onclick="calcularNotaFiscal()">Confirmar Nota Fiscal</button>
+  </form>
+
+  <div id="notaFiscalResult">
+    <h2>Nota Fiscal Gerada</h2>
+    <table>
+      <tr>
+        <th>Nome</th>
+        <th>CNPJ</th>
+        <th>Serviço</th>
+        <th>Valor do Serviço</th>
+        <th>Imposto</th>
+        <th>Total</th>
+      </tr>
+      <tr>
+        <td id="resultadoNome"></td>
+        <td id="resultadoCnpj"></td>
+        <td id="resultadoServico"></td>
+        <td id="resultadoValor"></td>
+        <td id="resultadoImposto"></td>
+        <td id="resultadoTotal"></td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    function calcularNotaFiscal() {
+      const nome = document.getElementById('nome').value;
+      const cnpj = document.getElementById('cnpj').value;
+      const servico = document.getElementById('servico').value;
+      const valor = parseFloat(document.getElementById('valor').value);
+      const imposto = parseFloat(document.getElementById('imposto').value);
+
+      const impostoCalculado = (valor * imposto) / 100;
+      const total = valor + impostoCalculado;
+
+      document.getElementById('resultadoNome').innerText = nome;
+      document.getElementById('resultadoCnpj').innerText = cnpj;
+      document.getElementById('resultadoServico').innerText = servico;
+      document.getElementById('resultadoValor').innerText = `R$ ${valor.toFixed(2)}`;
+      document.getElementById('resultadoImposto').innerText = `R$ ${impostoCalculado.toFixed(2)}`;
+      document.getElementById('resultadoTotal').innerText = `R$ ${total.toFixed(2)}`;
+
+      document.getElementById('notaFiscalResult');
+
+    }
+  </script>
+
+</body>
+</html>
